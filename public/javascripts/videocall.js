@@ -169,8 +169,8 @@ function loadInnerHtml(){
     content += '<div class="col-md-12">';
     content += '<div id="demoContainer">';
     content += '<div id="videos">';
-    content += '<video autoplay="autoplay" id="selfVideo"  class="easyrtcMirror" muted="muted" volume="0"></video>';
-    content += '<video autoplay="autoplay" id="callerVideo" style="width: 320px;"></video>';
+    content += '<video autoplay="autoplay" id="callerVideo"></video>';
+    content += '<video autoplay="autoplay" id="selfVideo"  class="easyrtcMirror" muted="muted" volume="0" style="width: 320px;"></video>';
     content += '</div>';
     content += '<div id="acceptCallBox"> <!-- Should be initially hidden using CSS -->';
     content += '<div id="acceptCallLabel">';
