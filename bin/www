@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+var debug = require('debug')('VideoChat');
+var app = require('../app');
+//var holla = require('holla');
+// Load required modules
+var http    = require("http");              // http server core module
+var express = require("express");           // web framework external module
+var io      = require("socket.io");         // web socket external module
+var easyrtc = require("easyrtc");           // EasyRTC external module
+
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+//var rtc = holla.createServer(server);
+
+// Start Socket.io so it attaches itself to Express server
+var socketServer = io.listen(server, {"log level":1});
+
+/*added for heroku
+socketServer.configure(function () {
+    socketServer.set("transports", ["xhr-polling"]);
+    socketServer.set("polling duration", 10);
+});
+*/
+// Start EasyRTC server
+var rtc = easyrtc.listen(app, socketServer);
