@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+  <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Face Chat is a video chat + blog + to-do app!">
+		<meta name="keywords" content="video chat, blog, to-do">
+		<title>Signup | Face Chat & Blog</title>
+ 
+		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
+		<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+		<!-- MAIN CSS (REQUIRED ALL PAGE)-->
+		<link href="/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/stylesheets/style.css" rel="stylesheet">
+		<link href="/stylesheets/style-responsive.css" rel="stylesheet">
+        <link href="/stylesheets/bootstrapValidator.min.css" rel="stylesheet">
+
+	</head>
+
+	
+	<body class="login tooltips">
+		
+		
+		<!--
+		===========================================================
+		BEGIN PAGE
+		===========================================================
+		-->
+		<div class="login-header text-center">
+			<img src="../public/images/logo-login.png" class="logo" alt="Logo">
+		</div>
+		<div class="login-wrapper">
+			<form id="signupForm" role="form" action="/signup" method="post">
+				<div class="form-group has-feedback lg left-feedback no-label">
+				  <input type="text" name="username" class="form-control no-border input-lg rounded" placeholder="Choose username" autofocus required>
+				  <span class="fa fa-user form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback lg left-feedback no-label">
+				  <input type="password"
+                         data-bv-identical="true"
+                         data-bv-identical-field="confirmPassword"
+                         data-bv-identical-message="The password and its confirm are not the same"
+                         name="password" class="form-control no-border input-lg rounded" placeholder="Enter password" required>
+				  <span class="fa fa-lock form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback lg left-feedback no-label">
+				  <input type="password"
+                         data-bv-identical="true"
+                         data-bv-identical-field="password"
+                         data-bv-identical-message="The password and its confirm are not the same"
+                         name="confirmPassword" class="form-control no-border input-lg rounded" placeholder="Re-enter password" required>
+				  <span class="fa fa-unlock form-control-feedback"></span>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-warning btn-lg btn-perspective btn-block">Signup</button>
+				</div>
+			</form>
+            <h2 class="text-center"> <%= message %></h2>
+		</div><!-- /.login-wrapper -->
+		
+		
+		<!--
+		===========================================================
+		END PAGE
+		===========================================================
+		-->
+    
+		<!--
+		===========================================================
+		Placed at the end of the document so the pages load faster
+		===========================================================
+		-->
+		<!-- MAIN JAVASRCIPT (REQUIRED ALL PAGE)-->
+		<script src="/javascripts/jquery.min.js"></script>
+		<script src="/javascripts/bootstrap.min.js"></script>
+		<script src="/plugins/retina/retina.min.js"></script>
+		<script src="/plugins/nicescroll/jquery.nicescroll.js"></script>
+		<script src="/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="/plugins/backstretch/jquery.backstretch.min.js"></script>
+        <script src="/javascripts/bootstrapValidator.min.js"></script>
+
+
+        <script>
+            $(document).ready(function() {
+                $('#signupForm').bootstrapValidator();
+            });
+        </script>
+		
+	</body>
+
+</html>

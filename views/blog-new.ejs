@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Face Chat is a video chat + blog + to-do app!">
+		<meta name="keywords" content="video chat, blog, to-do">
+		<title>New Blog | Face Chat</title>
+ 
+		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
+		<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+		<!-- MAIN CSS (REQUIRED ALL PAGE)-->
+		<link href="/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/stylesheets/style.css" rel="stylesheet">
+		<link href="/stylesheets/style-responsive.css" rel="stylesheet">
+        <link href="/stylesheets/effects.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="/stylesheets/easyrtc.css" />
+
+        <script src="/javascripts/jquery.min.js"></script>
+        <script src="/javascripts/bootstrap.min.js"></script>
+
+        <!-- Assumes global locations for socket.io.js and easyrtc.js -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/javascripts/easyrtc.js"></script>
+        <script type="text/javascript" src="/javascripts/videocall.js"></script>
+
+	</head>
+ 
+	<body class="tooltips" onload="connect()">
+				
+		<!--
+		===========================================================
+		BEGIN PAGE
+		===========================================================
+		-->
+		<div class="wrapper">
+			<!-- BEGIN TOP NAV -->
+			<div class="top-navbar">
+				<div class="top-navbar-inner">
+					
+					<!-- Begin Logo brand -->
+					<div class="logo-brand">
+						<a href="home"><img src="/images/logo.png" alt="logo"></a>
+					</div><!-- /.logo-brand -->
+					<!-- End Logo brand -->
+
+					<!-- Begin Collapse menu nav -->
+					<div class="top-nav-content" id="main-fixed-nav">
+						<ul class="nav navbar-nav navbar-left">
+							<li><a href="/home">Home</a></li>
+							<li><a href="blog-new">New Blog</a></li>
+							<li><a href="todo">To-Do</a></li>
+						</ul>
+
+						<!-- Begin user session nav -->
+						<ul class="nav-user navbar-right">
+							<li class="dropdown">
+							  <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="/images/user-img.jpg" class="avatar img-circle" alt="Avatar">
+								Hi, <strong id="username"><%= user.username%></strong>
+							  </a>
+							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
+								<li><a href="/signout">Log out</a></li>
+							  </ul>
+							</li>
+						</ul>
+						<!-- End user session nav -->
+
+					</div><!-- /.navbar-collapse -->
+					<!-- End Collapse menu nav -->
+					
+				</div><!-- /.top-navbar-inner -->
+			</div><!-- /.top-navbar -->
+			<!-- END TOP NAV -->
+			
+			<!-- BEGIN SIDEBAR RIGHT -->
+			<div class="sidebar-right right-sidebar-nicescroller toggle-left">
+				<div class="right-sidebar-nicescroller-heading">
+					<ul class="nav nav-tabs square nav-justified">
+					  <li class="active"><a href="#online-user-sidebar" data-toggle="tab"><i class="fa fa-comments"></i></a></li>
+					  <li class=""><a href="#task-sidebar" data-toggle="tab"><i class="fa fa-tasks"></i></a></li>
+					</ul>
+				</div>
+
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="online-user-sidebar">
+                        <ul class="sidebar-menu online-user" id="online-user-list">
+                            <li class="static">USERS</li>
+                        </ul>
+					</div>
+
+					<div class="tab-pane fade" id="task-sidebar">
+						<ul class="sidebar-menu sidebar-task">
+						<li class="static">UNCOMPLETED</li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="in progress" data-placement="left">
+							<i class="fa fa-clock-o icon-task-sidebar progress"></i>
+							Creating documentation
+							<span class="small-caps">Deadline : Next week</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="uncompleted" data-placement="left">
+							<i class="fa fa-exclamation-circle icon-task-sidebar uncompleted"></i>
+							Eating sand
+							<span class="small-caps">Deadline : 2 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="uncompleted" data-placement="left">
+							<i class="fa fa-exclamation-circle icon-task-sidebar uncompleted"></i>
+							Sending payment
+							<span class="small-caps">Deadline : 2 seconds ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="in progress" data-placement="left">
+							<i class="fa fa-clock-o icon-task-sidebar progress"></i>
+							Uploading new version
+							<span class="small-caps">Deadline : Tomorrow</span>
+						</a></li>
+						
+						<li class="static">COMPLETED</li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Drinking coffee
+							<span class="small-caps">Completed : 10 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Walking to nowhere
+							<span class="small-caps">Completed : Yesterday</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Sleeping under bridge
+							<span class="small-caps">Completed : Feb 10 2014</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Buying some cigarettes
+							<span class="small-caps">Completed : Jan 15 2014</span>
+						</a></li>
+						
+						<li class="static text-center"><button class="btn btn-success btn-sm">See all tasks</button></li>
+					</ul>
+					</div><!-- /#task-sidebar -->
+				</div><!-- /.tab-content -->
+			</div><!-- /.sidebar-right -->
+			<!-- END SIDEBAR RIGHT -->
+			
+			
+			
+			<!-- BEGIN PAGE CONTENT -->
+			<div class="page-content toggle-left">
+				
+				
+				<div class="container-fluid"  id="container">
+					<!-- Begin page heading -->
+					<h1 class="page-heading">New blog</h1>
+					<!-- End page heading -->
+				
+					<!-- Begin breadcrumb -->
+					<ol class="breadcrumb default square rsaquo sm">
+						<li><a href="home"><i class="fa fa-home"></i></a></li>
+						<li class="active">Add new blog</li>
+					</ol>
+					<!-- End breadcrumb -->
+					
+					
+					<div class="the-box no-border">
+						<h4 class="small-heading more-margin-bottom">Add New Blog</h4>
+
+						<form role="form" action="/blog/new" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+							<input type="text" name="title" class="form-control input-lg rounded bold-border" placeholder="Post title here..." required>
+							</div>
+							<div class="form-group">
+							<textarea name="content" class="form-control input-lg rounded bold-border no-resize" style="height: 300px;" placeholder="Post content here..." required></textarea>
+							</div>
+                            <div class="form-group">
+                                <label>Featured image</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" readonly>
+											<span class="input-group-btn">
+												<span class="btn btn-default btn-file">
+													Browse&hellip; <input type="file" name="picture">
+												</span>
+											</span>
+                                </div><!-- /.input-group -->
+                            </div>
+							<div class="form-group">
+							<button type="submit" class="btn btn-lg btn-success">Save & Post</button>
+							</div>
+						</form>
+
+					</div><!-- /.the-box no-border -->
+					
+					
+					
+				
+				</div><!-- /.container-fluid -->
+				
+				
+				
+				<!-- BEGIN FOOTER -->
+				<footer>
+					&copy; 2014 <a href="http://fh-kiel.de/" target="_blank">FH-Kiel</a><br />
+				</footer>
+				<!-- END FOOTER -->
+				
+				
+			</div><!-- /.page-content -->
+		</div><!-- /.wrapper -->
+		<!-- END PAGE CONTENT -->
+		
+		
+	
+		<!--
+		===========================================================
+		END PAGE
+		===========================================================
+		-->
+		
+		<!--
+		===========================================================
+		Placed at the end of the document so the pages load faster
+		===========================================================
+		-->
+		<!-- MAIN JAVASRCIPT (REQUIRED ALL PAGE)-->
+<!--
+		<script src="/javascripts/jquery.min.js"></script>
+		<script src="/javascripts/bootstrap.min.js"></script>
+-->
+		<script src="/plugins/retina/retina.min.js"></script>
+		<script src="/plugins/nicescroll/jquery.nicescroll.js"></script>
+		<script src="/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="/plugins/backstretch/jquery.backstretch.min.js"></script>
+
+        <!-- MAIN APPS JS -->
+        <script src="javascripts/apps.js"></script>
+        <!--<script src="javascripts/status-updater.js"></script>-->
+
+    </body>
+
+</html>
