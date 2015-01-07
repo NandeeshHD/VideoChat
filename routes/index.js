@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../app').passport;
 var BlogHandler = require('../services/blogHandler');
+var TodoHandler = require('../services/todoHandler');
 
 var isAuthenticated = function (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -99,6 +100,10 @@ router.post('/blog/new', isAuthenticated, function(req, res, next){
 /* Handle Add New Comment */
 router.post('/blog-content/comment/:id', isAuthenticated, function(req, res, next){
     BlogContentHandler.addCommentByID(req, res);
+});
+
+router.post('/todo/new', isAuthenticated, function(req, res, next){
+    TodoHandler.addTask(req, res);
 });
 
 module.exports = router;

@@ -106,6 +106,7 @@ module.exports = {
                     console.log('inside if...........');
                     return req.body.currentPicture || '';
                 }
+/*
                 var data = fs.readFileSync(req.files.picture.path);
                 var fileName = req.files.picture.originalname;
                 var uid = crypto.randomBytes(10).toString('hex');
@@ -113,6 +114,15 @@ module.exports = {
                 fs.mkdirSync(dir, '0777');
                 fs.writeFileSync(dir + "/" + fileName, data);
                 return '/uploads/' + uid + "/" + fileName;
+*/
+                var data = fs.readFileSync(req.files.picture.path);
+                var fileName = req.files.picture.originalname;
+                var uid = crypto.randomBytes(10).toString('hex');
+                var dir = __dirname + "/../public/uploads/";
+                //fs.mkdirSync(dir, '0777');
+                fs.writeFileSync(dir + "/" + uid, data);
+                return '/uploads/' + uid;
+
             }
         });
         res.redirect('/home');
